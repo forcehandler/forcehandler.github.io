@@ -1,7 +1,9 @@
 	 // Initialize the FirebaseUI Widget using Firebase.
 	 // FirebaseUI config.
       var uiConfig = {
-        signInSuccessUrl: '/visit_firestore.html',
+        //signInSuccessUrl: '/visit_firestore.html',    // for uploading to github pages
+
+        signInSuccessUrl: 'visit_firestore.html',     // for localhost
         signInOptions: [
         	  /*provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
 		      requireDisplayName: false*/

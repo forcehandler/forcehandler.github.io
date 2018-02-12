@@ -81,6 +81,7 @@ $(function(){
               if(workflow != null){
                 for(y in workflow){
                   console.log(y + ": " + workflow[y]);
+                  addWorkflowButton(y);
                   var pageData = workflow[y];
                   for(z in pageData){
                     console.log(z + ": " + pageData[z]);
@@ -100,5 +101,10 @@ $(function(){
           
       });
   });
+
+  function addWorkflowButton(title){
+    var r= $('<input type="button" value="' + title + '"/>');
+        $("body").append(r);
+  }
 
 });
