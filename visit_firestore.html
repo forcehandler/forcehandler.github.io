@@ -2,7 +2,12 @@
 <head>
     <meta charset="utf-8">
     <title>Visit</title>
+
+    <link rel="stylesheet" href="https:////cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- datatabel js -->
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>
@@ -17,6 +22,20 @@
 <button id="logoutButton">Logout</button>
 <button id="loadButton">Load the data object</button>
 <button id="loadPhotosButton">Load the first photos object</button>
+<div id="pg_workflow_buttons"></div>
+
+<div style="overflow-x:auto;">
+    <table id="table">
+        <thead>
+
+        </thead>
+        <tbody>
+
+
+        </tbody>
+    </table>
+</div>
+
 <script src="js/visit_app.js"></script>
 
 </body>

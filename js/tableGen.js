@@ -28,39 +28,21 @@ $(function () {
                 //console.log(array);
                 //getdata(doc);
             });
-            genColHeaders(array);
+            var col_headers = genColHeaders(array);
             console.log("headers: ", col_headers );
-            setTableData();
+            setTableData(col_headers, array);
            //addDataToTable();
         });
         console.log(array);
     });
 
 
-
-
-    /*function genObj(doc){
-        var obj = {};
-        for(var x in doc.data()){
-            obj[x] = doc.data()[x];
-        }
-        return obj;
-    }
-
-    function genInnerArray(doc){
-        var a = [];
-        for(x in doc.data()){
-            a.push(doc.data()[x]);
-        }
-        return a;
-    }*/
-
     var array = [];
     function generateArray(doc){
         array.push(doc);
     }
 
-    function setTableData() {
+    function setTableData(col_headers, array) {
         console.log("Setting table data");
         $('#table').DataTable({
             data: array,
@@ -72,9 +54,9 @@ $(function () {
         });
     }
 
-    var row = "";
+    //var row = "";
 
-    function getdata(doc) {
+    /*function getdata(doc) {
         row += '<tr>';
         for (x in doc.data()) {
             row += '<td>' + doc.data()[x];
@@ -87,23 +69,23 @@ $(function () {
 
     function addDataToTable() {
         $("#table").append(row);
-        /*$("p").click(function(){
+        /!*$("p").click(function(){
             $(this).hide();
-        });*/
-    }
+        });*!/
+    }*/
 
 
     /*https://stackoverflow.com/questions/39644079/how-to-display-the-column-headers-dynamically-in-jquery-data-table*/
 
-    var col_headers = [];
-
     function genColHeaders(arr) {
+        var col_headers = [];
         $.each(arr[0], function (key, value) {
             var my_item = {};
             my_item.data = key;
             my_item.title = key;
             col_headers.push(my_item);
-        });
+        })
+        return col_headers;
     }
 
 });
