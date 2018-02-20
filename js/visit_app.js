@@ -94,11 +94,6 @@ $(function () {
         });
     }
 
-    function addWorkflowButton(title) {
-        var r = $('<input type="button" value="' + title + '"/>');
-        $("body").append(r);
-    }
-
     //####################################################################################3
 
     /*https://stackoverflow.com/questions/20253246/adding-click-event-for-a-button-created-dynamically-using-jquery/20253294#20253294*/
@@ -126,8 +121,15 @@ $(function () {
         var visitorCollRef = workflowRef.doc(workflow_name).collection("visitors");
         visitorCollRef.get().then(function(visitorsList){
             visitorsList.forEach(function(visitorDoc){
-                console.log(visitorDoc.id, visitorDoc.data());
-                data.push(visitorDoc.data());
+                var obj = visitorDoc.data();
+
+                var myDate = new Date(visitorDoc.id*1);
+                var date=myDate.toLocaleString();
+
+                obj["date"] = date;
+                console.log(visitorDoc.id, obj);
+
+                data.push(obj);
             });
             var col_headers = genColHeaders(data);
             setTableData(col_headers, data);
