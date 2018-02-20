@@ -19,16 +19,23 @@
             background-color: #f2f2f2
         }
     </style>
-    <link rel="stylesheet" href="https:////cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- datatabel js -->
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <!--<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>-->
+
+    <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+    <!--<script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>-->
+
     <!-- firebase and firestore -->
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>
 
-    <script src="js/genTableTest.js"></script>
 
 
 </head>
@@ -39,8 +46,8 @@
     will display a horizontal scroll bar when needed.</p>
 <p>Resize the browser window to see the effect. Try to remove the div element and see what happens to the table.</p>
 <button id="loadTable">Load Table</button>
-<div style="overflow-x:auto;">
-    <table id="table">
+<!--<div class="container">
+    <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
 
         </thead>
@@ -49,7 +56,21 @@
 
         </tbody>
     </table>
+</div>-->
+
+<div class="container" >
+
+    <table id="example" class='table table-striped table-bordered' cellspacing="0" width="100%">
+        <thead>
+
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
 </div>
 
+
+<script src="js/genTableTest.js"></script>
 </body>
 </html>

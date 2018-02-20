@@ -44,7 +44,7 @@ $(function () {
 
     function setTableData(col_headers, array) {
         console.log("Setting table data");
-        $('#table').DataTable({
+        $('#example').DataTable({
             data: array,
             /*columns: [
                 {data: 'name'},
