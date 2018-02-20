@@ -94,41 +94,6 @@ $(function () {
         });
     }
 
-
-    visitorRef
-    // obtain data from the firestore database of the user
-    /*loadDataButton.addEventListener("click", function(){
-      console.log("clicked");
-        visitorRef.get().then(function(snapshot){
-            snapshot.forEach(function(doc){
-              console.log(doc.data());
-              for(x in doc.data()){
-                console.log(x + ": " + doc.data()[x]);
-                var workflow = doc.data()[x];
-                if(workflow != null){
-                  for(y in workflow){
-                    console.log(y + ": " + workflow[y]);
-                    addWorkflowButton(y);
-                    var pageData = workflow[y];
-                    for(z in pageData){
-                      console.log(z + ": " + pageData[z]);
-                      var pageDataItems = pageData[z];
-                      for(u in pageDataItems){
-                        console.log(u + ": " + pageDataItems[u]);
-                        var results = pageDataItems[u];
-                        for(v in results){
-                          console.log(v + ": " + results[v]);
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            });
-
-        });
-    });*/
-
     function addWorkflowButton(title) {
         var r = $('<input type="button" value="' + title + '"/>');
         $("body").append(r);
@@ -147,7 +112,7 @@ $(function () {
             id: 'btn_b',
             on: {
                 click: function () {
-                    alert(this.value);
+                    //alert(this.value);
                     getVisitors(this.value);
                 }
             }
