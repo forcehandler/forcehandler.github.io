@@ -50,6 +50,7 @@ $(function () {
             $("#uid").text(uid);
 
             initFirestoreDbRef(user);
+            showWorkflowButtons();
             // ...
         } else {
             // User is signed out.
@@ -83,6 +84,15 @@ $(function () {
             });
         });
     });
+
+    function showWorkflowButtons(){
+        workflowRef.get().then(function (snapshot) {
+            snapshot.forEach(function (workflow) {
+                //addWorkflowButton(workflow.id);
+                addBtn(workflow.id);
+            });
+        });
+    }
 
 
     visitorRef
@@ -186,7 +196,11 @@ $(function () {
                 {data: 'name'},
                 {data: 'phone'}
             ]*/
-            "columns": col_headers
+            "columns": col_headers,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         });
     }
 
