@@ -103,7 +103,7 @@ $(function () {
     // Add workflow buttons to the div element "pg_workflow_buttons"
     var div = $('<div />', {'data-role': 'fieldcontain'})
 
-    function addBtn(title) {
+    /*function addBtn(title) {
         var btn1 = $('<input />', {
             type: 'button',
             value: title,
@@ -117,6 +117,22 @@ $(function () {
             }
         });
         div.append(btn1).appendTo($('#pg_workflow_buttons'));
+    }*/
+
+    function addBtn(title) {
+        var btn1 = $('<a/>', {
+            class: 'waves-effect waves-light btn',
+            text: title,
+            id: 'btn_b',
+            on: {
+                click: function () {
+                    //alert(this.value);
+                    currentWorkflowName = this.text;
+                    getVisitors(this.text);
+                }
+            }
+        });
+        div.append(btn1).appendTo($('#workflow_btns'));
     }
 
     function getVisitors(workflow_name) {
@@ -179,7 +195,7 @@ $(function () {
 
             imgPathReference.getDownloadURL().then(function(url) {
                 console.log("url", url);
-                $('#images').append('<img style="width:256px;height:256px;" id="' + foldersName[i] + '" src="' + url + '" />');
+                $('#modal-images').append('<img style="width:256px;height:256px;" id="' + foldersName[i] + '" src="' + url + '" />');
             }).catch(function(error) {
                 // Handle any errors
             });
@@ -230,16 +246,28 @@ $(function () {
         console.log(table.row(this).data());
         var id = table.row(this).data()['ID'];
         console.log('ID', id);
+        openModal(id);
         // get all the images from storage
         // get list of folder names where the photos are present
         // current workflow name in in currentWorkflowName variable
 
         //clear all the current images
-        $("#images").empty();
+        $('#modal-images').empty();
         getPhotosFolders(id).then(function(folders){
             console.log(folders);
 
         });
     });
+
+
+    //############################################################################3
+    // Modal Dialog for images
+
+    function openModal(id){
+        $('#modal1').modal('open');
+        $('.modal-content p').text(id);
+    }
+
+    $('.modal').modal();
 
 });
