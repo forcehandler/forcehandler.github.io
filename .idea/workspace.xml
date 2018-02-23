@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7dca1bdf-1e75-4da6-8d29-53c2f9e5f368" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/visit_firestore.html" afterPath="$PROJECT_DIR$/visit_firestore.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -41,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/visit_firestore.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
-              <caret line="40" column="1" lean-forward="false" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
+              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -184,7 +183,7 @@
       <workItem from="1519270520537" duration="3979000" />
       <workItem from="1519316385301" duration="6408000" />
       <workItem from="1519389509592" duration="5223000" />
-      <workItem from="1519395320939" duration="5000" />
+      <workItem from="1519395320939" duration="83000" />
     </task>
     <task id="LOCAL-00001" summary="1) Table now works fine with the sample list of json data.&#10;2) Automatically generates the table names and the row data.">
       <created>1518998656262</created>
@@ -235,11 +234,18 @@
       <option name="project" value="LOCAL" />
       <updated>1519395152748</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="2) Added image loading.">
+      <created>1519395334034</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1519395334034</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41668000" />
+    <option name="totallyTimeSpent" value="41746000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -610,7 +616,7 @@
     <entry file="file://$PROJECT_DIR$/visit_firestore.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="40" column="1" lean-forward="false" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
