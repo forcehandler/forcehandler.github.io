@@ -1,6 +1,7 @@
 $(function () {
 
-
+var table;
+var click = 0;
 
     var config = {
         apiKey: "AIzaSyAaAyo1xJZTUCSlPG4oFP03i7IbMuShyw4",
@@ -16,7 +17,7 @@ $(function () {
     var collectionRef = firestore.collection("collection");
 
     $("#loadTable").click(function () {
-
+        click++;
         collectionRef.get().then(function (snapshot) {
             snapshot.forEach(function (doc) {
                 console.log(doc.data());
@@ -30,7 +31,12 @@ $(function () {
             });
             var col_headers = genColHeaders(array);
             console.log("headers: ", col_headers );
-            setTableData(col_headers, array);
+            if(click == 1) {
+                setTableData(col_headers, array);
+            }
+            else{
+                refreshTableData(col_headers, array);
+            }
            //addDataToTable();
         });
         console.log(array);
@@ -44,13 +50,34 @@ $(function () {
 
     function setTableData(col_headers, array) {
         console.log("Setting table data");
+        table = $('#example').DataTable({
+            data: array,
+            /*columns: [
+                {data: 'name'},
+                {data: 'phone'}
+            ]*/
+            "columns": col_headers,
+            colReorder: {
+                realtime: true
+            }
+        });
+    }
+
+    function refreshTableData(col_headers, array){
+        console.log('refreshTableData');
+
+        $('#example').DataTable().destroy();
+        $('#example').empty();
         $('#example').DataTable({
             data: array,
             /*columns: [
                 {data: 'name'},
                 {data: 'phone'}
             ]*/
-            "columns": col_headers
+            "columns": col_headers,
+            colReorder: {
+                realtime: true
+            }
         });
     }
 
@@ -87,5 +114,18 @@ $(function () {
         })
         return col_headers;
     }
+
+
+    //####################################################################################
+/*https://stackoverflow.com/a/30191827/6544607*/
+
+
+    $('#example tbody').on('click', 'tr', function () {
+        console.log(table.row(this).data());
+        var date = table.row(this).data()['phone'];
+        console.log('phone', date);
+    });
+
+
 
 });

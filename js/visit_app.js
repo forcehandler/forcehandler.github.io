@@ -11,6 +11,7 @@ $(function () {
     firebase.initializeApp(config);
 
     var firestore = firebase.firestore();
+    var storage = firebase.storage();
 
     var loggeduser = firebase.auth().currentUser;
 
@@ -18,6 +19,8 @@ $(function () {
     var testRef;
     var workflowRef;
 
+    var table;
+    var currentWorkflowName;
 
     const loadDataButton = document.getElementById("loadButton");
 
@@ -108,6 +111,7 @@ $(function () {
             on: {
                 click: function () {
                     //alert(this.value);
+                    currentWorkflowName = this.value;
                     getVisitors(this.value);
                 }
             }
@@ -126,7 +130,9 @@ $(function () {
                 var myDate = new Date(visitorDoc.id*1);
                 var date=myDate.toLocaleString();
 
-                obj["date"] = date;
+                obj["Date"] = date;
+                obj["ID"] = visitorDoc.id*1;
+
                 console.log(visitorDoc.id, obj);
 
                 data.push(obj);
@@ -134,6 +140,50 @@ $(function () {
             var col_headers = genColHeaders(data);
             setTableData(col_headers, data);
         });
+    }
+
+    function getPhotosFolders(visitor_id){
+        var promise = new Promise(function(resolve, reject){
+            var photoDocRef = workflowRef.doc(currentWorkflowName).collection("visitors")
+                .doc(visitor_id+"").collection("photos").doc(visitor_id+"");
+
+            photoDocRef.get().then(function(doc) {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data());
+                    var folderList = [];
+                    for (var x in doc.data()){
+                        folderList.push(x);
+                    }
+                    addPhotos(folderList, visitor_id);
+                    resolve(folderList);
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                    reject("Could not get folder list");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+                reject('Error occurred');
+            });
+        });
+
+        return promise;
+    }
+
+    function addPhotos(foldersName, visitor_id){
+        for(var i in foldersName){
+            var uid = firebase.auth().currentUser.uid;
+            var path = uid + '/' + currentWorkflowName + '/' + foldersName[i] + '/' + visitor_id;
+            console.log("image path " , path);
+            var imgPathReference = storage.ref(path);
+
+            imgPathReference.getDownloadURL().then(function(url) {
+                console.log("url", url);
+                $('#images').append('<img style="width:256px;height:256px;" id="' + foldersName[i] + '" src="' + url + '" />');
+            }).catch(function(error) {
+                // Handle any errors
+            });
+        }
     }
 
     //##################################################################################################
@@ -157,7 +207,7 @@ $(function () {
 
     function setTableData(col_headers, array) {
         console.log("Setting table data");
-        $('#table').DataTable({
+        table = $('#table').DataTable({
             data: array,
             /*columns: [
                 {data: 'name'},
@@ -170,5 +220,26 @@ $(function () {
             ]
         });
     }
+
+
+    //###############################################################################################
+
+    /*https://stackoverflow.com/a/30191827/6544607*/
+
+    $('#table tbody').on('click', 'tr', function () {
+        console.log(table.row(this).data());
+        var id = table.row(this).data()['ID'];
+        console.log('ID', id);
+        // get all the images from storage
+        // get list of folder names where the photos are present
+        // current workflow name in in currentWorkflowName variable
+
+        //clear all the current images
+        $("#images").empty();
+        getPhotosFolders(id).then(function(folders){
+            console.log(folders);
+
+        });
+    });
 
 });
