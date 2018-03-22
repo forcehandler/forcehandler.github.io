@@ -223,7 +223,8 @@ $(function () {
 
     // data generation part
 
-    function genColHeaders(arr) {
+    // Remove it
+    /*function genColHeaders(arr) {
         var col_headers = [];
         $.each(arr[0], function (key, value) {
             var my_item = {};
@@ -234,7 +235,7 @@ $(function () {
 
         console.log("col1", col_headers);
         return col_headers;
-    }
+    }*/
 
     function newGenColHeaders(workflow_name) {
         var promise = new Promise(function (resolve, reject) {
@@ -317,7 +318,7 @@ $(function () {
         });
     });
 
-    $("#table tbody").on('click', 'button', function (e) {
+    $("#table ").on('click', 'button', function (e) {
         var data = table.row($(this).parents('tr')).data();
         console.log("deleting", data);
         e.stopPropagation(); //prevent the click to bubble up to tr
