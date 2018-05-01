@@ -166,7 +166,7 @@ $(function () {
 
                 data.push(obj);
             });
-            var col_headers = genColHeaders(data);
+            //var col_headers;
             newGenColHeaders(workflow_name).then(function (col_headers) {
                 setTableData(col_headers, data);
             });
@@ -186,7 +186,7 @@ $(function () {
                     for (var x in doc.data()) {
                         folderList.push(x);
                     }
-                    addPhotos(folderList, visitor_id);
+                    //addPhotos(folderList, visitor_id);
                     resolve(folderList);
                 } else {
                     // doc.data() will be undefined in this case
@@ -244,6 +244,10 @@ $(function () {
                     var ques = doc.data()['questions'];
                     console.log(ques);
                     var col_headers = [];
+                    col_headers.push({
+                        data: "ID",
+                        title: "ID"
+                    });
                     for (key in ques) {
                         var my_item = {};
                         my_item.data = ques[key];
@@ -254,10 +258,7 @@ $(function () {
                         data: "Date",
                         title: "Date"
                     });
-                    col_headers.push({
-                        data: "ID",
-                        title: "ID"
-                    });
+                    
                     col_headers.push({
                         data: "Actions",
                         title: "Action"
@@ -277,6 +278,7 @@ $(function () {
         console.log("Setting table data");
         table = $('#table').DataTable({
             data: array,
+            "order": [[ 0, "desc" ]],
             /*columns: [
                 {data: 'name'},
                 {data: 'phone'}
@@ -305,7 +307,7 @@ $(function () {
         console.log(table.row(this).data());
         var id = table.row(this).data()['ID'];
         console.log('clicked ID', id);
-        openModal(id);
+        
         // get all the images from storage
         // get list of folder names where the photos are present
         // current workflow name in in currentWorkflowName variable
@@ -314,7 +316,14 @@ $(function () {
         $('#modal-images').empty();
         getPhotosFolders(id).then(function (folders) {
             console.log(folders);
-
+            if(Array.isArray(folders) && folders.length){
+                addPhotos(folders, id);
+                openModal(id);
+            }
+            else {
+                console.log("No photos found!!")
+            }
+            
         });
     });
 
