@@ -156,10 +156,18 @@ $(function () {
             visitorsList.forEach(function (visitorDoc) {
                 var obj = visitorDoc.data();
 
-                var myDate = new Date(visitorDoc.id * 1);
-                var date = myDate.toLocaleString();
+                var d = new Date(visitorDoc.id * 1);
+								var hours = d.getHours();
+              	if(Math.floor(d.getHours()/10) == 0){
+									hours = "0" + d.getHours();
+								}
+								var minutes = d.getMinutes();
+              	if(Math.floor(d.getMinutes()/10) == 0){
+									minutes = "0" + d.getMinutes();
+								}
+								var formattedDate = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()} ${hours}:${minutes}`;
 
-                obj["Date"] = date;
+                obj["Date"] = formattedDate;
                 obj["ID"] = visitorDoc.id * 1;
 
                 console.log(visitorDoc.id, obj);
@@ -248,16 +256,16 @@ $(function () {
 //                        data: "ID",
 //                        title: "ID"
 //                    });
+										col_headers.push({
+                        data: "Date",
+                        title: "Date"
+                    });
                     for (key in ques) {
                         var my_item = {};
                         my_item.data = ques[key];
                         my_item.title = ques[key];
                         col_headers.push(my_item);
                     }
-                    col_headers.push({
-                        data: "Date",
-                        title: "Date"
-                    });
                     
                     col_headers.push({
                         data: "Actions",
