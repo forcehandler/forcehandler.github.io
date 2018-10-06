@@ -244,10 +244,10 @@ $(function () {
                     var ques = doc.data()['questions'];
                     console.log(ques);
                     var col_headers = [];
-                    col_headers.push({
-                        data: "ID",
-                        title: "ID"
-                    });
+//                    col_headers.push({
+//                        data: "ID",
+//                        title: "ID"
+//                    });
                     for (key in ques) {
                         var my_item = {};
                         my_item.data = ques[key];
